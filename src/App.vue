@@ -1,16 +1,19 @@
 <template>
   <div id="app" class="container">
     <h1>Clients</h1>
+    <client-table-bue :clients="clients" />
     <client-table :clients="clients" />
   </div>
 </template>
 
 <script>
+import ClientTableBue from '@/components/ClientTableBue.vue'
 import ClientTable from '@/components/ClientTable.vue'
 
 export default {
   name: 'app',
   components: {
+    ClientTableBue,
     ClientTable,
   },
   
