@@ -1,48 +1,55 @@
 <template>
   <div id="app" class="container">
-    <h1>Clients</h1>
-    <client-table-bue :clients="clients" />
-    <client-table :clients="clients" />
+    <h1>Monthly Clients</h1>
+    <retainer-client-table-bue :retainerClients="retainerClients" />
+    <h1>Project Clients</h1>
+    <project-client-table-bue :projectClients="projectClients" />
   </div>
 </template>
 
 <script>
-import ClientTableBue from '@/components/ClientTableBue.vue'
-import ClientTable from '@/components/ClientTable.vue'
+import RetainerClientTableBue from '@/components/RetainerClientTableBue.vue'
+import ProjectClientTableBue from '@/components/ProjectClientTableBue.vue'
 
 export default {
   name: 'app',
   components: {
-    ClientTableBue,
-    ClientTable,
+    RetainerClientTableBue,
+    ProjectClientTableBue,
   },
   
   data() {
     return {
-      clients: [],
+      retainerClients: [],
+      projectClients: []
     }
   },
 
   mounted() {
-    this.getClients()
+    this.getRetainerClients(),
+    this.getProjectClients()
   },
 
-  /*
-  computed: {
-    orderedClients: function () {
-      return clients.orderBy(this.clients, 'clientName')
-    }
-  },
-  */
 
   methods: {
 
-    async getClients() {
+    async getRetainerClients() {
       try {
-        const response = await fetch('https://www.focusonlinetravel.co.za/clientBudgets.php')
+        const response = await fetch('https://www.focusonlinetravel.co.za/clientBudgets.php?type=retainer')
         //const response = await fetch('https://jsonplaceholder.typicode.com/users')
         const data = await response.json()
-        this.clients = data
+        this.retainerClients = data
+      } catch (error) {
+        //console.error(error)
+      }
+    },
+
+    async getProjectClients() {
+      try {
+        const response = await fetch('https://www.focusonlinetravel.co.za/clientBudgets.php?type=projects')
+        //const response = await fetch('https://jsonplaceholder.typicode.com/users')
+        const data = await response.json()
+        this.projectClients = data
       } catch (error) {
         //console.error(error)
       }

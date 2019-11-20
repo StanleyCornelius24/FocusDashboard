@@ -1,11 +1,11 @@
 <template>
-    <b-table :data="clients" :row-class="(row, index) => row.projectBudget > row.projectTime && 'is-info'" :columns="columns" :default-sort-direction="asc"></b-table>
+    <b-table :data="retainerClients" :columns="columns" :default-sort-direction="asc"></b-table>
 </template>
 
 <script>
     export default {
         props: {
-          clients: Array,
+          retainerClients: Array,
         },
 	data() {
 		return {
